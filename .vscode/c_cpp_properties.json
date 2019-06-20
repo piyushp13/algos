@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:/Users/Piyush.Pushkar/mingw/include",
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "cStandard": "c11",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "C:/Users/Piyush.Pushkar/mingw/bin/g++.exe"
+        }
+    ],
+    "version": 4
+}
