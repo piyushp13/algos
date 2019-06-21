@@ -5,9 +5,9 @@ class Node
 {
 public:
     int data;
-    Node* next;
-    Node* head;
-    Node* tail;
+    Node *next;
+    Node *head;
+    Node *tail;
     Node(int x)
     {
         data = x;
@@ -33,7 +33,9 @@ public:
         {
             head = newNode;
             tail = head;
-        } else {
+        }
+        else
+        {
             tail->next = newNode;
             tail = tail->next;
         }
@@ -52,12 +54,46 @@ public:
         Node *headRef = head;
         while (headRef != NULL)
         {
-            cout << headRef->data << endl;
+            cout << headRef->data << " ";
             headRef = headRef->next;
         }
+        cout << endl;
+    }
+
+    void reverseList()
+    {
+        // Your code here
+        Node* prevEle = NULL;
+        Node* curr = head;
+        while(curr != NULL) {
+            head = curr->next;
+            curr->next = prevEle;
+            prevEle = curr;
+            curr = head;
+        }
+        head = prevEle;
+    }
+
+    void deleteNode(int k) {
+        Node* headRef = head;
+        int index = k;
+        while(--k > 1) {
+            head = head->next;
+        }
+        Node* temp = head->next;
+        if (temp != NULL) {
+            head->next = temp->next;
+            if (index == 1) {
+                head->data = temp->data;
+            }
+            free(temp);
+            head = headRef;
+        } else {
+            head = NULL;
+        }
+        return;
     }
 };
-
 
 int main()
 {
@@ -72,6 +108,12 @@ int main()
         cin >> num;
         myList->insertAtEnd(num);
     }
+    myList->printList();
+    // myList->reverseList();
+    // myList->printList();
+    int k;
+    cin >> k;
+    myList->deleteNode(k);
     myList->printList();
     return 0;
 }
