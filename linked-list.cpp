@@ -60,12 +60,23 @@ public:
         cout << endl;
     }
 
+    void printList(Node* head) {
+        Node *headRef = head;
+        while (headRef != NULL)
+        {
+            cout << headRef->data << " ";
+            headRef = headRef->next;
+        }
+        cout << endl;
+    }
+
     void reverseList()
     {
         // Your code here
-        Node* prevEle = NULL;
-        Node* curr = head;
-        while(curr != NULL) {
+        Node *prevEle = NULL;
+        Node *curr = head;
+        while (curr != NULL)
+        {
             head = curr->next;
             curr->next = prevEle;
             prevEle = curr;
@@ -74,46 +85,100 @@ public:
         head = prevEle;
     }
 
-    void deleteNode(int k) {
-        Node* headRef = head;
+    void deleteNode(int k)
+    {
+        Node *headRef = head;
         int index = k;
-        while(--k > 1) {
+        while (--k > 1)
+        {
             head = head->next;
         }
-        Node* temp = head->next;
-        if (temp != NULL) {
+        Node *temp = head->next;
+        if (temp != NULL)
+        {
             head->next = temp->next;
-            if (index == 1) {
+            if (index == 1)
+            {
                 head->data = temp->data;
             }
             free(temp);
             head = headRef;
-        } else {
+        }
+        else
+        {
             head = NULL;
         }
         return;
+    }
+
+    Node* sortedMerge(Node *head2)
+    {
+        Node* curr = (Node*)malloc(sizeof(Node));
+        if (head->data < head2->data) {
+            curr->data = head->data;
+            head = head->next;
+        } else {
+            curr->data = head2->data;
+            head2 = head2->next;
+        }
+        Node* newHead = curr;
+        while (head != NULL && head2 != NULL)
+        {
+            if (head->data < head2->data)
+            {
+                curr->next = head;
+                head = head->next;
+            }
+            else
+            {
+                curr->next = head2;
+                head2 = head2->next;
+            }
+            curr = curr->next;
+        }
+        if (head != NULL) {
+            curr->next = head;
+        } else if (head2 != NULL) {
+            curr->next = head2;
+        }
+        head = newHead;
+        return newHead;
     }
 };
 
 int main()
 {
-    int n;
-    cin >> n;
+    cout << "Enter n and m" << endl;
+    int n, m;
+    cin >> n >> m;
+    cout << "Enter first list" << endl;
     int firstElement;
     cin >> firstElement;
-    Node *myList = new Node(firstElement);
+    Node *myList1 = new Node(firstElement);
     for (int i = 0; i < n - 1; i++)
     {
         int num;
         cin >> num;
-        myList->insertAtEnd(num);
+        myList1->insertAtEnd(num);
     }
-    myList->printList();
-    // myList->reverseList();
-    // myList->printList();
-    int k;
-    cin >> k;
-    myList->deleteNode(k);
-    myList->printList();
+    cout << "Enter second list" << endl;
+    cin >> firstElement;
+    Node *myList2 = new Node(firstElement);
+    for (int i = 0; i < m - 1; i++)
+    {
+        int num;
+        cin >> num;
+        myList2->insertAtEnd(num);
+    }
+    myList1->printList();
+    myList2->printList();
+    myList1->sortedMerge(myList2->head);
+    myList1->printList();
+    // myList1->reverseList();
+    // myList1->printList();
+    // int k;
+    // cin >> k;
+    // myList1->deleteNode(k);
+    // myList1->printList();
     return 0;
 }
