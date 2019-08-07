@@ -66,7 +66,7 @@ class BinaryTree2D {
         }
     }
 }
-public class BinaryTree {
+public class BinaryIndexedTree2D {
     public static void main(String args[]) {
         System.out.println("Hello");
         int inputArray[][] = {{1, 2, 3, 4}, {5, 3, 8, 1}, {4, 6, 7, 5}, {2, 4, 8, 9}};
